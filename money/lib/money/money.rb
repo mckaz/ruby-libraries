@@ -53,6 +53,7 @@ class Money
   # @return [BigDecimal] when infinite_precision is true
   #
   # @see infinite_precision
+  type :@fractional, '() -> %integer', typecheck: :now
   type :fractional, '() -> %integer', typecheck: :now
   def fractional
     # Ensure we have a BigDecimal. If the Money object is created

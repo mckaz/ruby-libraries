@@ -18,6 +18,9 @@ class Money
     #
     # @example
     #    - Money.new(100) #=> #<Money @fractional=-100>
+    
+    type Money::Arithmetic, :fractional, '() -> %real'
+    type Money::Arithmetic, :-@, '() -> Money'
     def -@
       self.class.new(-fractional, currency)
     end
@@ -37,6 +40,11 @@ class Money
     #   Money.new(100, "USD").eql?(Money.new(100, "GBP"))  #=> false
     #   Money.new(0, "USD").eql?(Money.new(0, "EUR"))      #=> true
     #   Money.new(100).eql?("1.00")                        #=> false
+    type Money, :fractional, '() -> %real'
+    type Money, :currency,   '() -> %real'
+    type Money::Arithmetic, :currency,   '() -> %real'
+    type '(Money) -> %bool b {{ fractional == fractional }}', verify: :now
+    # type '(Money) -> %bool b {{ fractional == fractional }}', typecheck: :now
     def eql?(other_money)
       if other_money.is_a?(Money)
         (fractional == other_money.fractional && currency == other_money.currency) ||
@@ -287,7 +295,6 @@ class Money
     # @example
     #   Money.new(100).zero? #=> false
     #   Money.new(0).zero?   #=> true
-    type Money::Arithmetic, :fractional, '() -> %bool'
     type :zero?, '() -> %bool', typecheck: :now
     def zero?
       fractional == 0
