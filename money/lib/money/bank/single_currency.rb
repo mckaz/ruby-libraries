@@ -1,4 +1,4 @@
-require 'money/bank/base'
+require '../ruby-libraries/money/lib/money/bank/base'
 
 class Money
   module Bank

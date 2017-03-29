@@ -287,7 +287,8 @@ class Money
     # @example
     #   Money.new(100).zero? #=> false
     #   Money.new(0).zero?   #=> true
-    type '() -> %bool', typecheck: :now
+    type Money::Arithmetic, :fractional, '() -> %bool'
+    type :zero?, '() -> %bool', typecheck: :now
     def zero?
       fractional == 0
     end

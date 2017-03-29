@@ -1,5 +1,5 @@
-require 'money/bank/base'
-require 'money/rates_store/memory'
+require '../ruby-libraries/money/lib/money/bank/base'
+require '../ruby-libraries/money/lib/money/rates_store/memory'
 require 'json'
 require 'yaml'
 

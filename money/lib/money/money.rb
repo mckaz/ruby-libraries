@@ -1,9 +1,13 @@
+# requires for type checking
+require "rdl"
+require "types/core"
+
 # encoding: utf-8
-require "money/bank/variable_exchange"
-require "money/bank/single_currency"
-require "money/money/arithmetic"
-require "money/money/constructors"
-require "money/money/formatting"
+require "../ruby-libraries/money/lib/money/bank/variable_exchange"
+require "../ruby-libraries/money/lib/money/bank/single_currency"
+require "../ruby-libraries/money/lib/money/money/arithmetic"
+require "../ruby-libraries/money/lib/money/money/constructors"
+require "../ruby-libraries/money/lib/money/money/formatting"
 
 # "Money is any object or record that is generally accepted as payment for
 # goods and services and repayment of debts in a given socio-economic context
@@ -49,6 +53,7 @@ class Money
   # @return [BigDecimal] when infinite_precision is true
   #
   # @see infinite_precision
+  type :fractional, '() -> %integer', typecheck: :now
   def fractional
     # Ensure we have a BigDecimal. If the Money object is created
     # from YAML, @fractional can end up being set to a Float.
